@@ -2,266 +2,67 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>CUTLINE PRO - 무료 굿즈 칼선·스티커 재단선 생성기 (설치없음)</title>
+  <title>CUTLINE PRO | 무료 굿즈 칼선·스티커 재단선 생성기</title>
   
-  <meta name="description" content="설치 없이 브라우저에서 바로 스티커, 아크릴 굿즈용 칼선(재단선)을 1초 만에 만들어보세요. 이미지 배경 제거(누끼), 화이트 레이어 생성, 외곽선 따기 기능을 무료로 제공합니다.">
-  <meta name="keywords" content="칼선 만들기, 칼선 생성기, 스티커 도안 제작, 아크릴 키링 도안, 굿즈 제작, 누끼 따기 사이트, 배경 제거, 오프셋 인쇄, 화이트 인쇄, 다이컷, png 변환, 컷라인 프로">
+  <meta name="description" content="설치 없이 브라우저에서 바로 스티커, 아크릴 굿즈용 칼선(재단선)을 만들어보세요. 이미지 배경 제거(누끼), 화이트 레이어 생성, 외곽선 따기 기능을 무료로 제공합니다.">
+  <meta name="keywords" content="칼선 만들기, 칼선 생성기, 스티커 도안, 아크릴 키링 제작, 굿즈 제작, 누끼 따기 사이트, 배경 제거, 오프셋, 화이트 인쇄, 다이컷, png 변환">
   <meta name="author" content="CUTLINE PRO">
-  <meta name="robots" content="index, follow"> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="CUTLINE PRO">
   <meta property="og:title" content="CUTLINE PRO - 초간편 굿즈 칼선 생성기">
   <meta property="og:description" content="이미지만 올리면 끝! 배경 제거부터 칼선 생성까지 3초 완성.">
-  <meta property="og:url" content="https://Grid-Worker.github.io/cutline-maker">
-  <meta property="og:image" content="https://Grid-Worker.github.io/cutline-maker/thumbnail.png"> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+  <meta property="og:url" content="https://Grid-Worker.github.io">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
 
   <style>
-    :root {
-      /* Light Theme Variables */
-      --bg-app: #f3f4f6;       
-      --bg-panel: #ffffff;     
-      --primary: #2563eb;      
-      --primary-hover: #1d4ed8;
-      --accent: #ef4444;       
-      --text-main: #1f2937;    
-      --text-sub: #6b7280;     
-      --border: #e5e7eb;       
-      --radius: 10px;
-      
-      --header-h: 56px;
-      --font-mono: "JetBrains Mono", "Consolas", monospace;
-    }
-
+    /* ... (CSS 스타일은 이전과 동일하므로 생략 없이 그대로 유지됩니다) ... */
+    :root { --bg-app: #f3f4f6; --bg-panel: #ffffff; --primary: #2563eb; --primary-hover: #1d4ed8; --accent: #ef4444; --text-main: #1f2937; --text-sub: #6b7280; --border: #e5e7eb; --radius: 10px; --header-h: 56px; --font-mono: "JetBrains Mono", "Consolas", monospace; }
     * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-    
-    body {
-      margin: 0;
-      background-color: var(--bg-app);
-      color: var(--text-main);
-      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 15px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      user-select: none;
-      touch-action: none; 
-    }
-
-    /* --- Header --- */
-    header {
-      height: var(--header-h);
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg-panel);
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-      z-index: 40;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-    }
+    body { margin: 0; background-color: var(--bg-app); color: var(--text-main); font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; height: 100vh; display: flex; flex-direction: column; overflow: hidden; user-select: none; touch-action: none; }
+    header { height: var(--header-h); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; background: var(--bg-panel); border-bottom: 1px solid var(--border); flex-shrink: 0; z-index: 40; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
     .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; color: #111; }
     .brand span { color: var(--primary); }
     .status-badge { font-size: 0.8rem; color: var(--text-sub); }
-
-    /* --- Main Layout --- */
-    main {
-      flex: 1; display: flex; overflow: hidden; position: relative;
-      height: calc(100vh - var(--header-h));
-    }
-
-    /* --- Sidebar (Toolbar) --- */
-    .toolbar {
-      width: 300px;
-      background: var(--bg-panel);
-      border-right: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      padding: 20px; gap: 24px;
-      flex-shrink: 0; 
-      z-index: 30;
-      overflow-y: auto;
-      height: 100%;
-    }
-    .toolbar::-webkit-scrollbar { width: 6px; }
-    .toolbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
-    
-    .section-title {
-      font-size: 0.75rem; color: var(--text-sub); text-transform: uppercase;
-      font-weight: 700; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
-      letter-spacing: 0.5px;
-    }
-
-    /* Footer in Sidebar */
-    .toolbar-footer {
-      margin-top: auto;
-      padding-top: 20px;
-      border-top: 1px dashed var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
-      color: var(--text-sub);
-    }
-
-    /* --- Workspace (Center + Drop Zone) --- */
-    .workspace {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      background-color: var(--bg-app);
-      position: relative;
-    }
-
-    .workspace.drag-active::after {
-      content: '📂 이미지를 놓아서 불러오기';
-      position: absolute; inset: 20px;
-      border: 4px dashed var(--primary); border-radius: 20px;
-      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; font-weight: 800; color: var(--primary);
-      z-index: 100; pointer-events: none;
-      box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
-    }
-
-    /* AD Banner */
-    .ad-banner {
-      width: 100%; height: 100px; background: #f9fafb; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 20;
-    }
-    .ad-placeholder {
-      width: 728px; height: 90px; border: 1px dashed #d1d5db; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      color: #9ca3af; font-size: 0.85rem; background: #fff;
-    }
-
-    /* UI Components */
-    button {
-      background: #fff; color: var(--text-main); border: 1px solid var(--border);
-      padding: 10px 0; border-radius: 8px; cursor: pointer; font-size: 0.9rem;
-      display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%;
-      transition: all 0.15s; font-weight: 600;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-    button:hover { background: #f9fafb; border-color: #d1d5db; transform: translateY(-1px); }
-    button:active { transform: translateY(0); }
-    
-    button.primary {
-      background: var(--primary); border-color: var(--primary); color: #fff;
-      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-    }
-    button.primary:hover { background: var(--primary-hover); }
-    
-    button.active {
-      background: #eff6ff; border-color: var(--primary); color: var(--primary);
-    }
-    
+    main { flex: 1; display: flex; overflow: hidden; position: relative; height: calc(100vh - var(--header-h)); }
+    .toolbar { width: 300px; background: var(--bg-panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px; gap: 24px; flex-shrink: 0; z-index: 30; overflow-y: auto; height: 100%; }
+    .toolbar::-webkit-scrollbar { width: 6px; } .toolbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+    .section-title { font-size: 0.75rem; color: var(--text-sub); text-transform: uppercase; font-weight: 700; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.5px; }
+    .toolbar-footer { margin-top: auto; padding-top: 20px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--text-sub); }
+    .workspace { flex: 1; display: flex; flex-direction: column; min-width: 0; background-color: var(--bg-app); position: relative; }
+    .workspace.drag-active::after { content: '📂 이미지를 놓아서 불러오기'; position: absolute; inset: 20px; border: 4px dashed var(--primary); border-radius: 20px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: var(--primary); z-index: 100; pointer-events: none; box-shadow: 0 0 20px rgba(37, 99, 235, 0.2); }
+    .ad-banner { width: 100%; height: 100px; background: #f9fafb; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 20; }
+    .ad-placeholder { width: 728px; height: 90px; border: 1px dashed #d1d5db; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #9ca3af; font-size: 0.85rem; background: #fff; }
+    button { background: #fff; color: var(--text-main); border: 1px solid var(--border); padding: 10px 0; border-radius: 8px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; transition: all 0.15s; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    button:hover { background: #f9fafb; border-color: #d1d5db; transform: translateY(-1px); } button:active { transform: translateY(0); }
+    button.primary { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2); } button.primary:hover { background: var(--primary-hover); }
+    button.active { background: #eff6ff; border-color: var(--primary); color: var(--primary); }
     button.sm { font-size: 0.8rem; padding: 8px 0; font-weight: 500; }
-    .btn-row { display: flex; gap: 8px; }
-    .btn-row > * { flex: 1; }
-    
-    input[type="range"] {
-      width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px;
-      -webkit-appearance: none; margin: 10px 0;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 18px; height: 18px;
-      background: #fff; border: 2px solid var(--primary);
-      border-radius: 50%; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
+    .btn-row { display: flex; gap: 8px; } .btn-row > * { flex: 1; }
+    input[type="range"] { width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; -webkit-appearance: none; margin: 10px 0; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; background: #fff; border: 2px solid var(--primary); border-radius: 50%; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     .input-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-sub); font-weight: 500; }
-
-    .file-drop {
-      display: block; border: 2px dashed #d1d5db; border-radius: var(--radius); 
-      padding: 12px; text-align: center; cursor: pointer; color: var(--text-sub); font-size: 0.85rem;
-      transition: 0.2s; background: #f9fafb; user-select: none;
-    }
+    .file-drop { display: block; border: 2px dashed #d1d5db; border-radius: var(--radius); padding: 12px; text-align: center; cursor: pointer; color: var(--text-sub); font-size: 0.85rem; transition: 0.2s; background: #f9fafb; user-select: none; }
     .file-drop:hover { border-color: var(--primary); color: var(--primary); background: #eff6ff; }
-
-    /* --- Canvas Area --- */
-    .canvas-container {
-      flex: 1; position: relative;
-      background-color: #ffffff;
-      background-image:
-        linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
-        linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
-        linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
-      background-size: 20px 20px;
-      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-      overflow: hidden; display: flex; align-items: center; justify-content: center;
-      touch-action: none; 
-    }
-    .canvas-container.erase-cursor { cursor: crosshair !important; }
-    .canvas-container.point-erase-cursor { cursor: no-drop !important; }
-    .canvas-container.add-point-cursor { cursor: crosshair !important; }
-    .canvas-container.panning { cursor: grabbing !important; }
-
-    .canvas-wrapper {
-      position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      transform-origin: center center;
-    }
-
+    .canvas-container { flex: 1; position: relative; background-color: #ffffff; background-image: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e5e7eb 75%), linear-gradient(-45deg, transparent 75%, #e5e7eb 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; overflow: hidden; display: flex; align-items: center; justify-content: center; touch-action: none; }
+    .canvas-container.erase-cursor { cursor: crosshair !important; } .canvas-container.point-erase-cursor { cursor: no-drop !important; } .canvas-container.add-point-cursor { cursor: crosshair !important; } .canvas-container.panning { cursor: grabbing !important; }
+    .canvas-wrapper { position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); transform-origin: center center; }
     canvas { display: block; image-rendering: pixelated; }
-    
-    svg.overlay {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      overflow: visible; pointer-events: none;
-    }
-    .overlay circle { 
-      fill: #fff; stroke: var(--primary); stroke-width: 2px; 
-      cursor: grab; transition: r 0.1s; pointer-events: auto; 
-    }
-    .overlay circle:hover { r: 6; fill: var(--primary); }
-    
-    .point-erase-active .overlay circle { cursor: pointer; stroke: var(--accent); }
-    .point-erase-active .overlay circle:hover { fill: var(--accent); r: 7; }
-
-    .overlay polyline { 
-      fill: none; stroke: var(--primary); stroke-width: 2px; 
-      stroke-linejoin: round; pointer-events: none; 
-    }
-    
-    .ghost-point {
-      fill: var(--accent); stroke: #fff; stroke-width: 2px;
-      pointer-events: none; opacity: 0; transition: opacity 0.05s;
-    }
-    .ghost-point.visible { opacity: 1; r: 6; }
-
-    /* --- Zoom Controls --- */
-    .zoom-controls {
-      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px);
-      padding: 6px 8px; border-radius: 99px; border: 1px solid var(--border);
-      display: flex; gap: 8px; align-items: center; z-index: 20;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    .zoom-btn { width: 32px; height: 32px; padding: 0; border-radius: 50%; font-size: 1.1rem; border:none; box-shadow:none; }
-    .zoom-btn:hover { background: #f3f4f6; }
+    svg.overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .overlay circle { fill: #fff; stroke: var(--primary); stroke-width: 2px; cursor: grab; transition: r 0.1s; pointer-events: auto; } .overlay circle:hover { r: 6; fill: var(--primary); }
+    .point-erase-active .overlay circle { cursor: pointer; stroke: var(--accent); } .point-erase-active .overlay circle:hover { fill: var(--accent); r: 7; }
+    .overlay polyline { fill: none; stroke: var(--primary); stroke-width: 2px; stroke-linejoin: round; pointer-events: none; }
+    .ghost-point { fill: var(--accent); stroke: #fff; stroke-width: 2px; pointer-events: none; opacity: 0; transition: opacity 0.05s; } .ghost-point.visible { opacity: 1; r: 6; }
+    .zoom-controls { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); padding: 6px 8px; border-radius: 99px; border: 1px solid var(--border); display: flex; gap: 8px; align-items: center; z-index: 20; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .zoom-btn { width: 32px; height: 32px; padding: 0; border-radius: 50%; font-size: 1.1rem; border:none; box-shadow:none; } .zoom-btn:hover { background: #f3f4f6; }
     .zoom-text { font-family: var(--font-mono); font-size: 0.85rem; min-width: 50px; text-align: center; color: var(--text-main); }
-
-    /* --- Preview Panel --- */
-    .preview-panel {
-      width: 260px; background: var(--bg-panel); border-left: 1px solid var(--border);
-      padding: 20px; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0; z-index: 30;
-    }
-    .preview-box {
-      width: 100%; aspect-ratio: 1; border-radius: var(--radius); border: 1px solid var(--border);
-      background-image: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e5e7eb 75%), linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
-      background-size: 10px 10px; background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
+    .preview-panel { width: 260px; background: var(--bg-panel); border-left: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0; z-index: 30; }
+    .preview-box { width: 100%; aspect-ratio: 1; border-radius: var(--radius); border: 1px solid var(--border); background-image: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e5e7eb 75%), linear-gradient(-45deg, transparent 75%, #e5e7eb 75%); background-size: 10px 10px; background-position: 0 0, 0 5px, 5px -5px, -5px 0px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     #previewCanvas { max-width: 100%; max-height: 100%; }
-
     @media (max-width: 1000px) { .preview-panel { display: none; } }
-    @media (max-width: 768px) {
-      main { flex-direction: column; }
-      .toolbar { width: 100%; height: auto; max-height: 40vh; border-right: none; border-bottom: 1px solid var(--border); }
-      .ad-banner { display: none; }
-    }
+    @media (max-width: 768px) { main { flex-direction: column; } .toolbar { width: 100%; height: auto; max-height: 40vh; border-right: none; border-bottom: 1px solid var(--border); } .ad-banner { display: none; } }
   </style>
 </head>
 <body>
@@ -304,25 +105,20 @@
 
     <div style="flex-grow:1;">
       <div class="section-title">컷라인(칼선) 생성</div>
-      
       <div class="input-label" style="margin-bottom:6px;">추천 프리셋</div>
       <div class="btn-row" style="margin-bottom:12px;">
         <button class="sm" onclick="applyPreset('sticker')">스티커</button>
         <button class="sm" onclick="applyPreset('acrylic')">아크릴</button>
         <button class="sm" onclick="applyPreset('badge')">배지</button>
       </div>
-
       <button id="autoOutlineBtn" class="primary">⚡ 컷라인 자동 생성</button>
-      
       <div class="input-label" style="margin-top:12px;"><span>다듬기 (Smoothing)</span> <span id="smoothDisplay">0</span></div>
       <input type="range" id="smoothInput" min="0" max="10" value="0">
-
       <div class="btn-row" style="margin-top:8px;">
         <button id="pointEraserBtn" class="sm">✖ 점 지우개</button>
         <button id="closePathBtn" class="sm">🔗 닫기</button>
         <button id="resetPointsBtn" class="sm">🗑️ 초기화</button>
       </div>
-
       <div style="font-size:0.75rem; color:var(--text-sub); margin-top:10px; line-height:1.5;">
         * <strong style="color:var(--accent)">마우스 커서가 바뀔 때</strong> 점 추가<br>
         * <kbd>Space</kbd> + <strong>마우스 휠 클릭</strong>으로 화면 이동<br>
@@ -334,10 +130,8 @@
       <div class="section-title">스타일 옵션</div>
       <div class="input-label"><span>여백 (Margin)</span> <span id="marginDisplay">15</span>px</div>
       <input type="range" id="marginInput" min="0" max="100" value="15">
-      
       <div class="input-label"><span>두께 (Width)</span> <span id="widthDisplay">8</span>px</div>
       <input type="range" id="widthInput" min="0" max="40" value="8">
-
       <div style="display:flex; justify-content:space-between; margin-top:8px; align-items:center;">
         <span style="font-size:0.85rem; color:var(--text-sub); font-weight:500;">라인 색상</span>
         <input type="color" id="lineColorInput" value="#ef4444" style="border:1px solid #ddd; width:50px; height:24px; cursor:pointer; padding:0; border-radius:4px;">
@@ -346,8 +140,8 @@
 
     <div class="toolbar-footer">
       <div style="margin-bottom:4px;">Total Visits</div>
-      <a href="https://hits.sh/grid-worker.github.io/cutline-maker/" target="_blank">
-        <img alt="Hits" src="https://hits.sh/grid-worker.github.io/cutline-maker.svg?style=flat-square&label=Visits&color=2563eb"/>
+      <a href="https://github.com/Grid-Worker/Grid-Worker.github.io" target="_blank">
+        <img alt="Hits" src="https://hits.sh/Grid-Worker.github.io.svg?style=flat-square&label=Visits&color=2563eb"/>
       </a>
       <div style="font-size:0.7rem; opacity:0.5; margin-top:6px;">© 2025 CUTLINE PRO</div>
     </div>
@@ -357,7 +151,6 @@
     <div class="ad-banner">
       <div class="ad-placeholder">Google AdSense Area (728x90)</div>
     </div>
-
     <section class="canvas-container" id="canvasContainer">
       <div class="canvas-wrapper" id="canvasWrapper">
         <canvas id="mainCanvas"></canvas>
@@ -387,8 +180,7 @@
 </main>
 
 <script>
-/* CUTLINE PRO Final Version */
-
+/* CUTLINE PRO Logic - Final Version */
 const canvas = document.getElementById('mainCanvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 const svgOverlay = document.getElementById('svgOverlay');
@@ -409,58 +201,40 @@ let centerPoint = { x: 0, y: 0 };
 let isClosed = false;
 let historyStack = [];
 let historyStep = -1;
-
-// View State
 let scale = 1;
 let translate = {x:0, y:0};
-
-// Interaction
 let isDraggingPoint = -1;
 let eraseMode = false;
 let pointEraserMode = false; 
 let isPanning = false;
 let startPan = {x:0, y:0};
 let snapInfo = null; 
-
-// Touch Variables
 let initialPinchDistance = null;
 let lastScale = 1;
 
-// --- Helper ---
 function resetTools() {
   eraseMode = false;
   pointEraserMode = false;
   document.getElementById('eraseModeBtn').classList.remove('active');
   document.getElementById('pointEraserBtn').classList.remove('active');
-  
   canvasContainer.classList.remove('erase-cursor');
   canvasContainer.classList.remove('point-erase-cursor');
   canvasContainer.classList.remove('point-erase-active');
-  
   ghostPoint.classList.remove('visible');
   snapInfo = null;
 }
 
-// --- Presets Logic ---
 function applyPreset(type) {
   const marginRange = document.getElementById('marginInput');
   const widthRange = document.getElementById('widthInput');
-
-  if (type === 'sticker') {
-    marginRange.value = 10; widthRange.value = 15; lineColorInput.value = '#ffffff';
-  } else if (type === 'acrylic') {
-    marginRange.value = 25; widthRange.value = 0; lineColorInput.value = '#ff0000';
-  } else if (type === 'badge') {
-    marginRange.value = 40; widthRange.value = 5; lineColorInput.value = '#ffffff';
-  }
-  
+  if (type === 'sticker') { marginRange.value = 10; widthRange.value = 15; lineColorInput.value = '#ffffff'; } 
+  else if (type === 'acrylic') { marginRange.value = 25; widthRange.value = 0; lineColorInput.value = '#ff0000'; } 
+  else if (type === 'badge') { marginRange.value = 40; widthRange.value = 5; lineColorInput.value = '#ffffff'; }
   document.getElementById('marginDisplay').textContent = marginRange.value;
   document.getElementById('widthDisplay').textContent = widthRange.value;
-  updatePointsWithMargin();
-  renderPreview();
+  updatePointsWithMargin(); renderPreview();
 }
 
-// --- History ---
 function saveState(actionName) {
   if (historyStep < historyStack.length - 1) historyStack = historyStack.slice(0, historyStep + 1);
   historyStack.push({
@@ -485,7 +259,6 @@ function restoreState(state) {
   syncCanvasSizeCSS(); renderOverlay(); renderPreview(); updateUI();
 }
 
-// --- Init ---
 function initCanvas(w, h) {
   canvas.width = w; canvas.height = h;
   syncCanvasSizeCSS();
@@ -501,13 +274,10 @@ function syncCanvasSizeCSS() {
   svgOverlay.setAttribute('viewBox', `0 0 ${canvas.width} ${canvas.height}`);
 }
 
-/* Drag & Drop Logic */
 fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
-
 dropZoneSidebar.addEventListener('dragover', e => { e.preventDefault(); dropZoneSidebar.style.borderColor = 'var(--primary)'; dropZoneSidebar.style.background = '#eff6ff'; });
 dropZoneSidebar.addEventListener('dragleave', e => { e.preventDefault(); dropZoneSidebar.style.borderColor = '#d1d5db'; dropZoneSidebar.style.background = '#f9fafb'; });
 dropZoneSidebar.addEventListener('drop', e => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); });
-
 workspaceDropZone.addEventListener('dragover', e => { e.preventDefault(); workspaceDropZone.classList.add('drag-active'); });
 workspaceDropZone.addEventListener('dragleave', e => { e.preventDefault(); workspaceDropZone.classList.remove('drag-active'); });
 workspaceDropZone.addEventListener('drop', e => { e.preventDefault(); workspaceDropZone.classList.remove('drag-active'); handleFile(e.dataTransfer.files[0]); });
@@ -519,7 +289,6 @@ function handleFile(file) {
   reader.readAsDataURL(file);
 }
 
-// --- View Control ---
 function updateTransform() {
   canvasWrapper.style.transform = `translate(${translate.x}px, ${translate.y}px) scale(${scale})`;
   document.getElementById('zoomLevel').textContent = Math.round(scale * 100) + "%";
@@ -527,79 +296,36 @@ function updateTransform() {
 document.getElementById('resetViewBtn').addEventListener('click', () => { scale = 1; translate = {x:0, y:0}; updateTransform(); });
 document.getElementById('zoomIn').addEventListener('click', () => { scale *= 1.2; updateTransform(); });
 document.getElementById('zoomOut').addEventListener('click', () => { scale /= 1.2; updateTransform(); });
-canvasContainer.addEventListener('wheel', e => {
-  e.preventDefault(); scale *= e.deltaY > 0 ? 0.9 : 1.1; updateTransform();
-}, {passive: false});
+canvasContainer.addEventListener('wheel', e => { e.preventDefault(); scale *= e.deltaY > 0 ? 0.9 : 1.1; updateTransform(); }, {passive: false});
 
-// Pan (Desktop)
 window.addEventListener('keydown', e => {
-  if(e.code === 'Space') {
-    canvasContainer.classList.add('panning');
-    ghostPoint.classList.remove('visible'); canvasContainer.classList.remove('add-point-cursor');
-  }
+  if(e.code === 'Space') { canvasContainer.classList.add('panning'); ghostPoint.classList.remove('visible'); canvasContainer.classList.remove('add-point-cursor'); }
   if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='z') { e.preventDefault(); e.shiftKey ? redo() : undo(); }
 });
-window.addEventListener('keyup', e => { 
-  if(e.code==='Space') { canvasContainer.classList.remove('panning'); }
-});
+window.addEventListener('keyup', e => { if(e.code==='Space') { canvasContainer.classList.remove('panning'); } });
 canvasContainer.addEventListener('mousedown', e => {
-  if (e.button === 1 || e.getModifierState('Space')) {
-    isPanning = true; startPan = { x: e.clientX - translate.x, y: e.clientY - translate.y };
-    canvasContainer.classList.add('panning'); e.preventDefault(); e.stopPropagation();
-  }
+  if (e.button === 1 || e.getModifierState('Space')) { isPanning = true; startPan = { x: e.clientX - translate.x, y: e.clientY - translate.y }; canvasContainer.classList.add('panning'); e.preventDefault(); e.stopPropagation(); }
 });
-window.addEventListener('mousemove', e => {
-  if (isPanning) { translate.x = e.clientX - startPan.x; translate.y = e.clientY - startPan.y; updateTransform(); }
-});
-window.addEventListener('mouseup', () => { 
-  isPanning = false; if(!event.getModifierState('Space')) canvasContainer.classList.remove('panning'); 
-});
+window.addEventListener('mousemove', e => { if (isPanning) { translate.x = e.clientX - startPan.x; translate.y = e.clientY - startPan.y; updateTransform(); } });
+window.addEventListener('mouseup', () => { isPanning = false; if(!event.getModifierState('Space')) canvasContainer.classList.remove('panning'); });
 
-/* --- Mobile Touch Events --- */
 canvasContainer.addEventListener('touchstart', (e) => {
-  if (e.touches.length === 1) {
-    isPanning = true;
-    startPan = { x: e.touches[0].clientX - translate.x, y: e.touches[0].clientY - translate.y };
-  } else if (e.touches.length === 2) {
-    isPanning = false; 
-    initialPinchDistance = Math.hypot(
-      e.touches[0].clientX - e.touches[1].clientX,
-      e.touches[0].clientY - e.touches[1].clientY
-    );
-    lastScale = scale;
-  }
+  if (e.touches.length === 1) { isPanning = true; startPan = { x: e.touches[0].clientX - translate.x, y: e.touches[0].clientY - translate.y }; } 
+  else if (e.touches.length === 2) { isPanning = false; initialPinchDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); lastScale = scale; }
 }, { passive: false });
-
 canvasContainer.addEventListener('touchmove', (e) => {
   e.preventDefault(); 
-  if (e.touches.length === 1 && isPanning) {
-    translate.x = e.touches[0].clientX - startPan.x;
-    translate.y = e.touches[0].clientY - startPan.y;
-    updateTransform();
-  } else if (e.touches.length === 2 && initialPinchDistance) {
-    const currentDistance = Math.hypot(
-      e.touches[0].clientX - e.touches[1].clientX,
-      e.touches[0].clientY - e.touches[1].clientY
-    );
-    const ratio = currentDistance / initialPinchDistance;
-    scale = lastScale * ratio;
-    updateTransform();
-  }
+  if (e.touches.length === 1 && isPanning) { translate.x = e.touches[0].clientX - startPan.x; translate.y = e.touches[0].clientY - startPan.y; updateTransform(); } 
+  else if (e.touches.length === 2 && initialPinchDistance) { const currentDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); scale = lastScale * (currentDistance / initialPinchDistance); updateTransform(); }
 }, { passive: false });
+canvasContainer.addEventListener('touchend', () => { isPanning = false; initialPinchDistance = null; });
 
-canvasContainer.addEventListener('touchend', () => {
-  isPanning = false;
-  initialPinchDistance = null;
-});
-
-// --- Math ---
 function getLocalPos(e) {
   const rect = canvasWrapper.getBoundingClientRect();
   const clientX = e.touches ? e.touches[0].clientX : e.clientX;
   const clientY = e.touches ? e.touches[0].clientY : e.clientY;
   return { x: (clientX - rect.left) / scale, y: (clientY - rect.top) / scale };
 }
-
 function getProjectedPoint(p, v, w) {
   const l2 = (v.x - w.x)**2 + (v.y - w.y)**2;
   if (l2 === 0) return v;
@@ -607,77 +333,44 @@ function getProjectedPoint(p, v, w) {
   t = Math.max(0, Math.min(1, t));
   return { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) };
 }
-
 function findClosestSnap(pos) {
   if (points.length < 2) return null;
-  let minDist = Infinity;
-  let result = null;
-  const threshold = 12 / scale;
-
+  let minDist = Infinity; let result = null; const threshold = 12 / scale;
   for(let i=0; i<points.length; i++) {
     if (!isClosed && i === points.length-1) break;
-    const p1 = points[i];
-    const p2 = points[(i+1)%points.length];
-    
+    const p1 = points[i]; const p2 = points[(i+1)%points.length];
     const proj = getProjectedPoint(pos, p1, p2);
     const d = Math.sqrt((pos.x - proj.x)**2 + (pos.y - proj.y)**2);
-    
-    if (d < minDist) {
-      minDist = d;
-      result = { index: i, pos: proj, dist: d };
-    }
+    if (d < minDist) { minDist = d; result = { index: i, pos: proj, dist: d }; }
   }
-  
-  if (result && result.dist < threshold) return result;
-  return null;
+  if (result && result.dist < threshold) return result; return null;
 }
 
-// --- Interaction ---
 canvasWrapper.addEventListener('mousedown', (e) => {
   if (!img.src || isPanning || e.button !== 0 || e.getModifierState('Space')) return;
   handleAction(e);
 });
-
 function handleAction(e) {
   const pos = getLocalPos(e);
-
   if (pointEraserMode) {
     if (e.target.tagName === 'circle' && !e.target.classList.contains('ghost-point')) {
       const idx = parseInt(e.target.dataset.index);
       points.splice(idx, 1);
       if (originalPoints.length > 0) originalPoints.splice(idx, 1);
-      renderOverlay();
-      saveState("점 삭제");
+      renderOverlay(); saveState("점 삭제");
     }
     return;
   }
-
-  if (e.target.tagName === 'circle' && !e.target.classList.contains('ghost-point')) {
-    isDraggingPoint = parseInt(e.target.dataset.index);
-    return;
-  }
-
-  if (eraseMode) {
-    floodErase(Math.round(pos.x), Math.round(pos.y));
-    return;
-  }
-
+  if (e.target.tagName === 'circle' && !e.target.classList.contains('ghost-point')) { isDraggingPoint = parseInt(e.target.dataset.index); return; }
+  if (eraseMode) { floodErase(Math.round(pos.x), Math.round(pos.y)); return; }
   if (snapInfo) {
     points.splice(snapInfo.index + 1, 0, snapInfo.pos);
-    if (originalPoints.length > 0) {
-        originalPoints.splice(snapInfo.index + 1, 0, snapInfo.pos);
-    }
-    saveState("점 추가");
-    snapInfo = null;
-    renderOverlay();
-    return;
+    if (originalPoints.length > 0) originalPoints.splice(snapInfo.index + 1, 0, snapInfo.pos);
+    saveState("점 추가"); snapInfo = null; renderOverlay(); return;
   }
-
   if (!isClosed) {
     points.push(pos);
-    if (originalPoints.length > 0 || points.length === 1) {
-        originalPoints.push(pos);
-    }
+    if (originalPoints.length > 0 || points.length === 1) originalPoints.push(pos);
     renderOverlay();
   }
 }
@@ -692,12 +385,9 @@ window.addEventListener('mousemove', e => {
     }
     return;
   }
-
   const pos = getLocalPos(e);
-
   if (!eraseMode && !pointEraserMode && points.length > 1) {
     const snap = findClosestSnap(pos);
-    
     if (snap) {
       snapInfo = snap;
       canvasContainer.classList.add('add-point-cursor');
@@ -711,12 +401,8 @@ window.addEventListener('mousemove', e => {
     }
   }
 });
+window.addEventListener('mouseup', () => { if(isDraggingPoint > -1) { saveState("점 이동"); isDraggingPoint = -1; } });
 
-window.addEventListener('mouseup', () => {
-  if(isDraggingPoint > -1) { saveState("점 이동"); isDraggingPoint = -1; }
-});
-
-// --- Tools Logic ---
 function floodErase(sx, sy) {
   const w=canvas.width, h=canvas.height;
   const imageData = ctx.getImageData(0,0,w,h);
@@ -725,43 +411,28 @@ function floodErase(sx, sy) {
   const startIdx = (sy*w+sx)*4;
   const sc = [data[startIdx], data[startIdx+1], data[startIdx+2], data[startIdx+3]];
   if (sc[3] === 0) return; 
-
-  const stack = [[sx, sy]];
-  const visited = new Uint8Array(w*h);
+  const stack = [[sx, sy]]; const visited = new Uint8Array(w*h);
   while(stack.length) {
-    const [x,y] = stack.pop();
-    const idx = y*w+x;
+    const [x,y] = stack.pop(); const idx = y*w+x;
     if(x<0||x>=w||y<0||y>=h||visited[idx]) continue;
-    visited[idx]=1;
-    const i=idx*4;
+    visited[idx]=1; const i=idx*4;
     const diff = Math.abs(data[i]-sc[0]) + Math.abs(data[i+1]-sc[1]) + Math.abs(data[i+2]-sc[2]);
-    if (diff <= tol && data[i+3]>0) {
-      data[i+3]=0; stack.push([x+1,y],[x-1,y],[x,y+1],[x,y-1]);
-    }
+    if (diff <= tol && data[i+3]>0) { data[i+3]=0; stack.push([x+1,y],[x-1,y],[x,y+1],[x,y-1]); }
   }
   ctx.putImageData(imageData,0,0); saveState("지우개"); renderPreview();
 }
 
 document.getElementById('removeBgBtn').addEventListener('click', () => {
-  if (!img.src) return;
-  resetTools();
+  if (!img.src) return; resetTools();
   const w=canvas.width, h=canvas.height;
-  const imageData = ctx.getImageData(0,0,w,h);
-  const data = imageData.data;
-  const tol = parseInt(document.getElementById('toleranceInput').value);
-  const bg = [data[0], data[1], data[2]]; 
-  const stack = [[0,0], [w-1,0], [0,h-1], [w-1,h-1]];
-  const visited = new Uint8Array(w*h);
+  const imageData = ctx.getImageData(0,0,w,h); const data = imageData.data;
+  const tol = parseInt(document.getElementById('toleranceInput').value); const bg = [data[0], data[1], data[2]]; 
+  const stack = [[0,0], [w-1,0], [0,h-1], [w-1,h-1]]; const visited = new Uint8Array(w*h);
   while(stack.length) {
-    const [x,y] = stack.pop();
-    const idx = y*w+x;
-    if(x<0||x>=w||y<0||y>=h||visited[idx]) continue;
-    visited[idx]=1;
-    const i=idx*4;
+    const [x,y] = stack.pop(); const idx = y*w+x;
+    if(x<0||x>=w||y<0||y>=h||visited[idx]) continue; visited[idx]=1; const i=idx*4;
     const diff = Math.abs(data[i]-bg[0]) + Math.abs(data[i+1]-bg[1]) + Math.abs(data[i+2]-bg[2]);
-    if (diff < tol*3 || data[i+3] < 20) {
-      data[i+3] = 0; stack.push([x+1,y],[x-1,y],[x,y+1],[x,y-1]);
-    }
+    if (diff < tol*3 || data[i+3] < 20) { data[i+3] = 0; stack.push([x+1,y],[x-1,y],[x,y+1],[x,y-1]); }
   }
   ctx.putImageData(imageData, 0, 0); saveState("자동 배경 제거"); renderPreview();
 });
@@ -782,35 +453,17 @@ document.getElementById('erodeBtn').addEventListener('click', () => {
 });
 
 document.getElementById('eraseModeBtn').addEventListener('click', (e) => {
-  const wasActive = eraseMode;
-  resetTools();
-  if (!wasActive) {
-    eraseMode = true;
-    e.target.classList.add('active');
-    canvasContainer.classList.add('erase-cursor');
-  }
+  const wasActive = eraseMode; resetTools();
+  if (!wasActive) { eraseMode = true; e.target.classList.add('active'); canvasContainer.classList.add('erase-cursor'); }
 });
-
 document.getElementById('pointEraserBtn').addEventListener('click', (e) => {
-  const wasActive = pointEraserMode;
-  resetTools();
-  if (!wasActive) {
-    pointEraserMode = true;
-    e.target.classList.add('active');
-    canvasContainer.classList.add('point-erase-cursor');
-    canvasContainer.classList.add('point-erase-active'); 
-  }
+  const wasActive = pointEraserMode; resetTools();
+  if (!wasActive) { pointEraserMode = true; e.target.classList.add('active'); canvasContainer.classList.add('point-erase-cursor'); canvasContainer.classList.add('point-erase-active'); }
 });
+document.getElementById('canvasBgPicker').addEventListener('input', (e) => { canvasContainer.style.backgroundImage = 'none'; canvasContainer.style.backgroundColor = e.target.value; });
 
-document.getElementById('canvasBgPicker').addEventListener('input', (e) => {
-  canvasContainer.style.backgroundImage = 'none';
-  canvasContainer.style.backgroundColor = e.target.value;
-});
-
-// Auto Outline
 document.getElementById('autoOutlineBtn').addEventListener('click', () => {
-  if (!img.src) return;
-  resetTools();
+  if (!img.src) return; resetTools();
   const w=canvas.width, h=canvas.height;
   const data = ctx.getImageData(0,0,w,h).data;
   let tx=0, ty=0, c=0;
@@ -823,72 +476,44 @@ document.getElementById('autoOutlineBtn').addEventListener('click', () => {
     const ang = (Math.PI*2*i)/rays; const dx=Math.cos(ang), dy=Math.sin(ang);
     for(let r=Math.max(w,h); r>=0; r-=2) {
       const x=Math.round(cx+dx*r), y=Math.round(cy+dy*r);
-      if(x>=0&&x<w&&y>=0&&y<h&&data[(y*w+x)*4+3]>20) {
-        temp.push({x:cx+dx*(r+5), y:cy+dy*(r+5)}); break;
-      }
+      if(x>=0&&x<w&&y>=0&&y<h&&data[(y*w+x)*4+3]>20) { temp.push({x:cx+dx*(r+5), y:cy+dy*(r+5)}); break; }
     }
   }
-  points = temp;
-  originalPoints = JSON.parse(JSON.stringify(temp));
-  isClosed = true;
-  updatePointsWithMargin(); 
-  saveState("자동 컷라인"); renderOverlay();
+  points = temp; originalPoints = JSON.parse(JSON.stringify(temp)); isClosed = true; updatePointsWithMargin(); saveState("자동 컷라인"); renderOverlay();
 });
 
 document.getElementById('closePathBtn').addEventListener('click', ()=>{ resetTools(); isClosed=true; renderOverlay(); });
 document.getElementById('resetPointsBtn').addEventListener('click', ()=>{ resetTools(); points=[]; originalPoints=[]; isClosed=false; renderOverlay(); });
 
-// --- Smooth Points Function ---
 function smoothPoints(pts, iterations) {
     if (iterations <= 0) return pts;
     let curr = [...pts];
     for (let k = 0; k < iterations; k++) {
-        const next = [];
-        const n = curr.length;
+        const next = []; const n = curr.length;
         for (let i = 0; i < n; i++) {
-            const prev = curr[(i - 1 + n) % n];
-            const p = curr[i];
-            const nextP = curr[(i + 1) % n];
-            next.push({
-                x: (prev.x + 2 * p.x + nextP.x) / 4,
-                y: (prev.y + 2 * p.y + nextP.y) / 4
-            });
+            const prev = curr[(i - 1 + n) % n]; const p = curr[i]; const nextP = curr[(i + 1) % n];
+            next.push({ x: (prev.x + 2 * p.x + nextP.x) / 4, y: (prev.y + 2 * p.y + nextP.y) / 4 });
         }
         curr = next;
     }
     return curr;
 }
 
-// --- Margin & Smooth Calculation ---
 function updatePointsWithMargin() {
     if (originalPoints.length === 0) return;
     const margin = parseInt(document.getElementById('marginInput').value) || 0;
     const smoothIter = parseInt(document.getElementById('smoothInput').value) || 0;
-
-    // 1. Apply Margin
     let marginedPoints = [];
-    if (margin === 0) {
-        marginedPoints = JSON.parse(JSON.stringify(originalPoints));
-    } else {
+    if (margin === 0) { marginedPoints = JSON.parse(JSON.stringify(originalPoints)); } 
+    else {
         for (let i = 0; i < originalPoints.length; i++) {
             const p = originalPoints[i];
-            const dx = p.x - centerPoint.x;
-            const dy = p.y - centerPoint.y;
+            const dx = p.x - centerPoint.x; const dy = p.y - centerPoint.y;
             const len = Math.sqrt(dx*dx + dy*dy);
-            if (len > 0) {
-                const ndx = dx / len;
-                const ndy = dy / len;
-                marginedPoints.push({
-                    x: p.x + ndx * margin,
-                    y: p.y + ndy * margin
-                });
-            } else {
-                marginedPoints.push(p);
-            }
+            if (len > 0) { const ndx = dx / len; const ndy = dy / len; marginedPoints.push({ x: p.x + ndx * margin, y: p.y + ndy * margin }); } 
+            else { marginedPoints.push(p); }
         }
     }
-
-    // 2. Apply Smoothing
     points = smoothPoints(marginedPoints, smoothIter);
 }
 
@@ -899,17 +524,10 @@ function renderOverlay() {
     const close = isClosed ? ` ${points[0].x},${points[0].y}` : '';
     html += `<polyline points="${pts}${close}" />`;
   }
-  points.forEach((p, i) => {
-    html += `<circle cx="${p.x}" cy="${p.y}" r="4" data-index="${i}" />`;
-  });
+  points.forEach((p, i) => { html += `<circle cx="${p.x}" cy="${p.y}" r="4" data-index="${i}" />`; });
   svgOverlay.innerHTML = html;
-  
   const newGhost = document.getElementById('ghostPoint');
-  if(ghostPoint && ghostPoint.classList.contains('visible')) {
-      newGhost.classList.add('visible');
-      newGhost.setAttribute('cx', ghostPoint.getAttribute('cx'));
-      newGhost.setAttribute('cy', ghostPoint.getAttribute('cy'));
-  }
+  if(ghostPoint && ghostPoint.classList.contains('visible')) { newGhost.classList.add('visible'); newGhost.setAttribute('cx', ghostPoint.getAttribute('cx')); newGhost.setAttribute('cy', ghostPoint.getAttribute('cy')); }
   renderPreview();
 }
 
@@ -934,22 +552,12 @@ function renderPreview() {
   previewCtx.drawImage(canvas, -minX+pad, -minY+pad);
 }
 
-// --- UI Sync ---
 function sync(range, disp) { 
     const r=document.getElementById(range),d=document.getElementById(disp); 
-    r.addEventListener('input',()=>{
-        d.textContent=r.value;
-        if (range === 'marginInput' || range === 'smoothInput') updatePointsWithMargin(); 
-        renderOverlay(); 
-    }); 
+    r.addEventListener('input',()=>{ d.textContent=r.value; if (range === 'marginInput' || range === 'smoothInput') updatePointsWithMargin(); renderOverlay(); }); 
 }
-sync('toleranceInput','tolDisplay'); 
-sync('marginInput','marginDisplay'); 
-sync('widthInput','widthDisplay');
-sync('smoothInput','smoothDisplay'); 
-
+sync('toleranceInput','tolDisplay'); sync('marginInput','marginDisplay'); sync('widthInput','widthDisplay'); sync('smoothInput','smoothDisplay'); 
 lineColorInput.addEventListener('input', () => { renderPreview(); });
-
 document.getElementById('undoBtn').addEventListener('click', undo);
 document.getElementById('redoBtn').addEventListener('click', redo);
 document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -960,21 +568,10 @@ function updateUI() {
   document.getElementById('redoBtn').disabled = historyStep >= historyStack.length - 1;
 }
 
-// --- Security Scripts ---
-document.addEventListener('contextmenu', function (e) {
-  e.preventDefault();
-  alert('보안을 위해 우클릭을 사용할 수 없습니다.');
-});
-
+document.addEventListener('contextmenu', function (e) { e.preventDefault(); alert('보안을 위해 우클릭을 사용할 수 없습니다.'); });
 document.addEventListener('keydown', function (e) {
-  if (
-    e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-    (e.ctrlKey && e.key === 'U')
-  ) {
-    e.preventDefault();
-    alert('소스 코드 보기는 비활성화되어 있습니다.');
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+    e.preventDefault(); alert('소스 코드 보기는 비활성화되어 있습니다.');
   }
 });
 </script>
