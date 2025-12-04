@@ -49,7 +49,6 @@
       flex-direction: column;
       overflow: hidden;
       user-select: none;
-      /* 중요 수정: body에는 touch-action: none을 제거함 (스크롤 허용) */
     }
 
     /* --- Header --- */
@@ -86,9 +85,8 @@
       padding: 20px; gap: 24px;
       flex-shrink: 0; 
       z-index: 40;
-      overflow-y: auto; /* 스크롤 허용 */
+      overflow-y: auto; /* PC 스크롤 */
       height: 100%;
-      -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
     }
     .toolbar::-webkit-scrollbar { width: 6px; }
     .toolbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
@@ -200,7 +198,7 @@
       background-size: 20px 20px;
       background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
       overflow: hidden; display: flex; align-items: center; justify-content: center;
-      /* 중요: 캔버스 내부에서만 터치 액션(스크롤 등)을 막음 */
+      /* 중요: 캔버스만 터치 제스처 막기 (드로잉/줌 위해) */
       touch-action: none; 
     }
     .canvas-container.erase-cursor { cursor: crosshair !important; }
@@ -265,32 +263,36 @@
     @media (max-width: 1000px) { .preview-panel { display: none; } }
     
     @media (max-width: 768px) {
-      body { overflow: auto; /* 중요: 툴바 스크롤 허용 */ }
+      body { 
+        /* 중요: 모바일에서 전체 스크롤 허용 (Toolbar 스크롤 위해) */
+        overflow: hidden; 
+      }
       main { 
         flex-direction: column; 
-        height: auto; 
-        min-height: calc(100vh - var(--header-h));
+        height: calc(100vh - var(--header-h));
       }
       
-      /* Mobile Layout Order: Canvas First, Toolbar Below */
+      /* Mobile Layout: Canvas Top, Toolbar Bottom */
       .workspace { 
         order: 1; 
-        height: 60vh; /* Canvas takes top 60% */
+        height: 55%; /* 화면 상단 55% 할당 */
         flex: none; 
+        border-bottom: 1px solid var(--border);
       }
       
       .toolbar { 
         order: 2; 
         width: 100%; 
-        height: auto; 
+        height: 45%; /* 화면 하단 45% 할당 */
         border-right: none; 
-        border-top: 1px solid var(--border);
-        overflow: visible; /* 컨텐츠 다 보여주기 */
+        overflow-y: auto !important; /* 스크롤 강제 */
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y; /* 수직 스크롤 허용 */
+        padding-bottom: 40px;
       }
 
-      .ad-banner { display: none; } /* Hide ad on mobile for space */
+      .ad-banner { display: none; } /* Mobile saves space */
       
-      /* Make Zoom Controls slightly smaller on mobile */
       .zoom-controls { bottom: 16px; padding: 4px 8px; }
       .zoom-btn { width: 32px; height: 32px; font-size: 1rem; }
     }
@@ -303,6 +305,7 @@
     <div style="width:24px;height:24px;background:var(--primary);border-radius:6px;"></div>
     CUTLINE<span>PRO</span>
   </div>
+  <div class="status-badge" id="statusMsg"></div>
 </header>
 
 <main>
@@ -425,7 +428,7 @@
 </main>
 
 <script>
-/* CUTLINE PRO Logic v6.3 - Mobile Touch Fixed */
+/* CUTLINE PRO Logic v6.4 - Final Mobile Scroll Fix */
 
 const canvas = document.getElementById('mainCanvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -509,7 +512,7 @@ function saveState(actionName) {
     isClosed: isClosed
   });
   if (historyStack.length > 20) historyStack.shift(); else historyStep++;
-  // updateUI();
+  updateUI();
 }
 function undo() { if (historyStep > 0) { historyStep--; restoreState(historyStack[historyStep]); } }
 function redo() { if (historyStep < historyStack.length - 1) { historyStep++; restoreState(historyStack[historyStep]); } }
@@ -520,7 +523,7 @@ function restoreState(state) {
   originalPoints = JSON.parse(JSON.stringify(state.originalPoints));
   centerPoint = { ...state.centerPoint };
   isClosed = state.isClosed;
-  syncCanvasSizeCSS(); renderOverlay(); renderPreview();
+  syncCanvasSizeCSS(); renderOverlay(); renderPreview(); updateUI();
 }
 
 // --- Init ---
@@ -593,7 +596,7 @@ window.addEventListener('mouseup', () => {
   isPanning = false; if(!event.getModifierState('Space')) canvasContainer.classList.remove('panning'); 
 });
 
-/* --- Mobile Touch Events (FIXED: Moved touch-action logic to CSS) --- */
+/* --- Mobile Touch Events --- */
 canvasContainer.addEventListener('touchstart', (e) => {
   if (e.touches.length === 1) {
     isPanning = true;
@@ -993,6 +996,10 @@ document.getElementById('redoBtn').addEventListener('click', redo);
 document.getElementById('downloadBtn').addEventListener('click', () => {
   const a = document.createElement('a'); a.download = 'cutline_final.png'; a.href = previewCanvas.toDataURL(); a.click();
 });
+function updateUI() {
+  document.getElementById('undoBtn').disabled = historyStep <= 0;
+  document.getElementById('redoBtn').disabled = historyStep >= historyStack.length - 1;
+}
 
 // --- Security Scripts ---
 document.addEventListener('contextmenu', function (e) {
@@ -1014,4 +1021,3 @@ document.addEventListener('keydown', function (e) {
 </script>
 </body>
 </html>
-
