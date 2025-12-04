@@ -47,7 +47,7 @@
       flex-direction: column;
       overflow: hidden;
       user-select: none;
-      touch-action: none; 
+      /* 중요 수정: body에는 touch-action: none을 제거함 (스크롤 허용) */
     }
 
     /* --- Header --- */
@@ -84,8 +84,9 @@
       padding: 20px; gap: 24px;
       flex-shrink: 0; 
       z-index: 40;
-      overflow-y: auto;
+      overflow-y: auto; /* 스크롤 허용 */
       height: 100%;
+      -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
     }
     .toolbar::-webkit-scrollbar { width: 6px; }
     .toolbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
@@ -197,6 +198,7 @@
       background-size: 20px 20px;
       background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
       overflow: hidden; display: flex; align-items: center; justify-content: center;
+      /* 중요: 캔버스 내부에서만 터치 액션(스크롤 등)을 막음 */
       touch-action: none; 
     }
     .canvas-container.erase-cursor { cursor: crosshair !important; }
@@ -261,7 +263,7 @@
     @media (max-width: 1000px) { .preview-panel { display: none; } }
     
     @media (max-width: 768px) {
-      body { overflow: auto; /* Allow body scroll for toolbar access */ }
+      body { overflow: auto; /* 중요: 툴바 스크롤 허용 */ }
       main { 
         flex-direction: column; 
         height: auto; 
@@ -281,7 +283,7 @@
         height: auto; 
         border-right: none; 
         border-top: 1px solid var(--border);
-        overflow: visible; /* Show full content */
+        overflow: visible; /* 컨텐츠 다 보여주기 */
       }
 
       .ad-banner { display: none; } /* Hide ad on mobile for space */
@@ -417,11 +419,11 @@
     <div class="preview-box">
       <canvas id="previewCanvas"></canvas>
     </div>
-    </aside>
+  </aside>
 </main>
 
 <script>
-/* CUTLINE PRO Logic v6.2 - Mobile Touch & Layout Fixes */
+/* CUTLINE PRO Logic v6.3 - Mobile Touch Fixed */
 
 const canvas = document.getElementById('mainCanvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -505,7 +507,7 @@ function saveState(actionName) {
     isClosed: isClosed
   });
   if (historyStack.length > 20) historyStack.shift(); else historyStep++;
-  // updateUI(); // Removed status update from footer
+  // updateUI();
 }
 function undo() { if (historyStep > 0) { historyStep--; restoreState(historyStack[historyStep]); } }
 function redo() { if (historyStep < historyStack.length - 1) { historyStep++; restoreState(historyStack[historyStep]); } }
@@ -589,7 +591,7 @@ window.addEventListener('mouseup', () => {
   isPanning = false; if(!event.getModifierState('Space')) canvasContainer.classList.remove('panning'); 
 });
 
-/* --- Mobile Touch Events (CRITICAL FIX) --- */
+/* --- Mobile Touch Events (FIXED: Moved touch-action logic to CSS) --- */
 canvasContainer.addEventListener('touchstart', (e) => {
   if (e.touches.length === 1) {
     isPanning = true;
